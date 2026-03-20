@@ -1,0 +1,126 @@
+════════════════════════════════════════════════════════════
+  GLORYBAGH VILLA — EMAIL SETUP GUIDE
+  Gmail pe inquiry mail paane ke liye yeh steps follow karo
+════════════════════════════════════════════════════════════
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+OPTION A — EmailJS (RECOMMENDED)
+Works on: GitHub Pages, any static host, cPanel — everywhere
+Free plan: 200 emails/month (enough for a villa!)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+STEP 1 — Create EmailJS Account
+  → Go to: https://www.emailjs.com
+  → Click "Sign Up Free"
+  → Sign up with your Gmail
+
+STEP 2 — Connect Your Gmail
+  → Dashboard → "Email Services" → "Add New Service"
+  → Choose "Gmail"
+  → Click "Connect Account" → Allow access to your Gmail
+  → Name it anything (e.g. "GloryBagh Gmail")
+  → Click "Create Service"
+  → COPY the Service ID (looks like: service_abc1234)
+
+STEP 3 — Create Email Template
+  → Dashboard → "Email Templates" → "Create New Template"
+  → Fill in:
+
+    ┌─────────────────────────────────────────────────┐
+    │ Subject:                                        │
+    │ New Inquiry — {{from_name}} | GloryBagh Villa   │
+    │                                                 │
+    │ Body (paste this exactly):                      │
+    │─────────────────────────────────────────────────│
+    │ New Booking Inquiry — GloryBagh Villa, Udaipur  │
+    │ ═══════════════════════════════════════════════ │
+    │                                                 │
+    │ GUEST DETAILS                                   │
+    │ Name     : {{from_name}}                        │
+    │ Email    : {{from_email}}                       │
+    │ Phone    : {{phone}}                            │
+    │                                                 │
+    │ STAY DETAILS                                    │
+    │ Check-in : {{checkin}}                          │
+    │ Check-out: {{checkout}}                         │
+    │ Guests   : {{guests}}                           │
+    │ Occasion : {{occasion}}                         │
+    │                                                 │
+    │ SPECIAL REQUESTS                                │
+    │ {{message}}                                     │
+    │                                                 │
+    │ ───────────────────────────────────────────     │
+    │ Received via GloryBagh Villa website            │
+    │ Reply directly to this email to respond.        │
+    └─────────────────────────────────────────────────┘
+
+  → To Email:   YOUR_GMAIL@gmail.com   ← apna Gmail dalo
+  → From Name:  GloryBagh Villa Inquiry
+  → Reply To:   {{reply_to}}           ← yeh daalna zaroori hai!
+                                          (taaki directly guest ko reply kar sako)
+
+  → Click "Save"
+  → COPY the Template ID (looks like: template_xyz7890)
+
+STEP 4 — Get Your Public Key
+  → Dashboard → top-right → "Account"
+  → Under "API Keys" → COPY the Public Key
+    (looks like: aBcDeFgHiJkLmNopQrSt)
+
+STEP 5 — Update your website files
+  Open  js/main.js  and replace these 3 lines at the top:
+
+    const EMAILJS_SERVICE_ID  = 'YOUR_SERVICE_ID';
+    const EMAILJS_TEMPLATE_ID = 'YOUR_TEMPLATE_ID';
+    const EMAILJS_PUBLIC_KEY  = 'YOUR_PUBLIC_KEY';
+
+  With your actual IDs, like:
+
+    const EMAILJS_SERVICE_ID  = 'service_abc1234';
+    const EMAILJS_TEMPLATE_ID = 'template_xyz7890';
+    const EMAILJS_PUBLIC_KEY  = 'aBcDeFgHiJkLmNopQrSt';
+
+  Also open  index.html  and find this line near the top:
+    <script>emailjs.init("YOUR_PUBLIC_KEY");</script>
+  Replace YOUR_PUBLIC_KEY with your actual key.
+
+STEP 6 — Test it!
+  → Open your website → fill inquiry form → Submit
+  → Check your Gmail inbox — mail aana chahiye within seconds!
+  → Check spam folder if not in inbox (first time sometimes)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+OPTION B — PHP Backend (cPanel/shared hosting only)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+If your hosting supports PHP:
+  → Open backend/inquiry.php
+  → Find line:  $to_email = 'reservations@glorybagh.com';
+  → Replace with your actual Gmail: $to_email = 'yourname@gmail.com';
+  → Upload via FTP/cPanel File Manager
+  → Done — PHP mail() will send to your Gmail
+
+NOTE: Gmail sometimes marks PHP mail() as spam.
+      EmailJS (Option A) is more reliable for Gmail delivery.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+TROUBLESHOOTING
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Mail nahi aaya?
+  1. Spam/Promotions folder check karo
+  2. EmailJS dashboard → "Email Logs" → error dekho
+  3. Free plan 200 emails/month hai — limit check karo
+  4. Public key sahi copy hua? (no extra spaces)
+
+Reply button Gmail pe kaam nahi kar raha?
+  → Template mein "Reply To: {{reply_to}}" daala hai?
+  → Haan — toh directly guest ko reply kar sakte ho Gmail se
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+FILES TO EDIT (summary)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  js/main.js    → Replace 3 EmailJS IDs (lines 8-10)
+  index.html    → Replace YOUR_PUBLIC_KEY in emailjs.init()
+  backend/inquiry.php → Replace email (for cPanel hosting)

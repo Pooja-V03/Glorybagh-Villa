@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description"
+    content="GloryBagh Villa Udaipur — A luxury private villa retreat in the City of Lakes. Book your exclusive stay." />
+  <title>GloryBagh Villa — Udaipur</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Raleway:wght@200;300;400;500;600&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+</head>
+
+<body>
+
+  <!-- SKELETON LOADER -->
+  <div id="skeletonLoader" class="skeleton-wrapper">
+    <div class="sk-nav"></div>
+    <div class="sk-hero">
+      <div class="sk-title-block">
+        <div class="sk-line long"></div>
+        <div class="sk-line medium"></div>
+        <div class="sk-line short"></div>
+      </div>
+    </div>
+    <div class="sk-gallery">
+      <div class="sk-card"></div>
+      <div class="sk-card"></div>
+      <div class="sk-card"></div>
+    </div>
+  </div>
+
+  <!-- MAIN SITE -->
+  <div id="mainContent" class="hidden">
+
+    <!-- NAV -->
+    <nav id="navbar">
+      <div class="nav-logo">
+        <!-- LOGO PLACEHOLDER: replace this div with <img src="assets/logo.png" class="logo-img" alt="GloryBagh Villa"> when you have a logo -->
+        <div class="logo-placeholder" id="logoArea">
+          <span class="logo-text">GloryBagh</span>
+          <span class="logo-sub">VILLA · UDAIPUR</span>
+        </div>
+      </div>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#hero" class="nav-link">Home</a></li>
+        <li><a href="#gallery" class="nav-link">Gallery</a></li>
+        <li><a href="#amenities" class="nav-link">Amenities</a></li>
+        <li><a href="#inquiry" class="nav-link">Book Now</a></li>
+        <li><a href="#contact" class="nav-link">Contact</a></li>
+      </ul>
+      <button class="burger" id="burgerBtn" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+    </nav>
+
+    <!-- Mobile Drawer -->
+    <nav class="mobile-drawer" id="mobileDrawer">
+      <button class="drawer-close" id="drawerClose">&#10005;</button>
+      <ul>
+        <li><a href="#hero" onclick="closeDrawer()">Home</a></li>
+        <li><a href="#gallery" onclick="closeDrawer()">Gallery</a></li>
+        <li><a href="#amenities" onclick="closeDrawer()">Amenities</a></li>
+        <li><a href="#inquiry" onclick="closeDrawer()">Book Now</a></li>
+        <li><a href="#contact" onclick="closeDrawer()">Contact</a></li>
+      </ul>
+    </nav>
+    <div class="drawer-overlay" id="drawerOverlay" onclick="closeDrawer()"></div>
+
+    <!-- HERO -->
+    <section id="hero" class="hero-section">
+      <div class="hero-bg-overlay"></div>
+      <div class="hero-particles" id="heroParticles"></div>
+      <div class="hero-content">
+        <p class="hero-eyebrow reveal-up">Welcome to</p>
+        <h1 class="hero-title reveal-up delay-1">GloryBagh Villa</h1>
+        <p class="hero-location reveal-up delay-2"><span class="location-dot">&#9670;</span> Udaipur, Rajasthan</p>
+        <p class="hero-tagline reveal-up delay-3">Where royal heritage meets serene luxury — a private escape unlike any
+          other.</p>
+        <div class="hero-cta reveal-up delay-4">
+          <a href="#gallery" class="btn-gold">Explore Villa</a>
+          <a href="#inquiry" class="btn-outline">Book Your Stay</a>
+        </div>
+      </div>
+      <div class="hero-scroll-hint">
+        <span>Scroll</span>
+        <div class="scroll-line"></div>
+      </div>
+    </section>
+
+    <!-- MARQUEE -->
+    <div class="marquee-strip">
+      <div class="marquee-track">
+        <span>Exclusive Villa &nbsp;&#xB7;&nbsp; Private Pool &nbsp;&#xB7;&nbsp; Lake Views &nbsp;&#xB7;&nbsp;
+          Rajasthani Heritage &nbsp;&#xB7;&nbsp; Bespoke Hospitality &nbsp;&#xB7;&nbsp; Udaipur &nbsp;&#xB7;&nbsp;
+          Luxury Retreat &nbsp;&#xB7;&nbsp; </span>
+        <span>Exclusive Villa &nbsp;&#xB7;&nbsp; Private Pool &nbsp;&#xB7;&nbsp; Lake Views &nbsp;&#xB7;&nbsp;
+          Rajasthani Heritage &nbsp;&#xB7;&nbsp; Bespoke Hospitality &nbsp;&#xB7;&nbsp; Udaipur &nbsp;&#xB7;&nbsp;
+          Luxury Retreat &nbsp;&#xB7;&nbsp; </span>
+      </div>
+    </div>
+
+    <!-- AMENITIES -->
+    <section id="amenities" class="amenities-section">
+      <div class="section-header">
+        <span class="section-tag reveal-up">VILLA FEATURES</span>
+        <h2 class="section-title reveal-up delay-1">Crafted for <em>Connoisseurs</em></h2>
+        <p class="section-sub reveal-up delay-2">Every corner of GloryBagh is designed to offer an unparalleled sensory
+          experience.</p>
+      </div>
+      <div class="amenities-grid">
+
+        <div class="amenity-card reveal-up">
+          <span class="amenity-num">01</span>
+          <div class="amenity-icon"><i class="fas fa-bed"></i></div>
+          <div class="amenity-title-wrap">
+            <h3>4 Bedrooms</h3>
+          </div>
+          <p>Four elegantly furnished bedrooms designed for absolute comfort, each exuding the warmth of Rajasthani
+            heritage.</p>
+        </div>
+
+        <div class="amenity-card reveal-up delay-1">
+          <span class="amenity-num">02</span>
+          <div class="amenity-icon"><i class="fas fa-water"></i></div>
+          <div class="amenity-title-wrap">
+            <h3>2 Private Pools</h3>
+          </div>
+          <p>Two exclusive swimming pools — your personal oasis under the open Udaipur sky, completely private.</p>
+        </div>
+
+        <div class="amenity-card reveal-up delay-2">
+          <span class="amenity-num">03</span>
+          <div class="amenity-icon"><i class="fas fa-leaf"></i></div>
+          <div class="amenity-title-wrap">
+            <h3>Private Garden</h3>
+          </div>
+          <p>A lush private garden — the perfect setting for morning chai, evening gatherings, or quiet moments of
+            solitude.</p>
+        </div>
+
+        <div class="amenity-card reveal-up delay-3">
+          <span class="amenity-num">04</span>
+          <div class="amenity-icon"><i class="fas fa-utensils"></i></div>
+          <div class="amenity-title-wrap">
+            <h3>Cook On Site</h3>
+          </div>
+          <p>A dedicated cook on premises to prepare authentic Rajasthani delicacies and your favourite meals, fresh
+            every day.</p>
+        </div>
+
+        <div class="amenity-card reveal-up delay-4">
+          <span class="amenity-num">05</span>
+          <div class="amenity-icon"><i class="fas fa-car"></i></div>
+          <div class="amenity-title-wrap">
+            <h3>Private Parking</h3>
+          </div>
+          <p>Secure, dedicated parking within the villa premises — ample space for multiple vehicles, stress-free.</p>
+        </div>
+
+        <div class="amenity-card reveal-up" style="transition-delay:0.75s">
+          <span class="amenity-num">06</span>
+          <div class="amenity-icon"><i class="fas fa-shield-alt"></i></div>
+          <div class="amenity-title-wrap">
+            <h3>24/7 Security</h3>
+          </div>
+          <p>Round-the-clock security ensuring complete peace of mind — your safety and privacy are our highest
+            priority.</p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- HOLOGRAPHIC GALLERY -->
+    <section id="gallery" class="gallery-section">
+      <div class="section-header">
+        <span class="section-tag reveal-up">THE VILLA</span>
+        <h2 class="section-title reveal-up delay-1">Immerse in <em>Splendour</em></h2>
+        <p class="section-sub reveal-up delay-2">A visual journey through spaces that redefine luxury living.</p>
+      </div>
+
+      <!--
+        HOW TO ADD PHOTOS:
+        Update data-img and data-title on each .ring-slide.
+        Images go in assets/images/ — up to 10 slides supported.
+      -->
+
+      <!-- 3D RING CAROUSEL STAGE -->
+      <div class="ring-stage" id="ringStage">
+        <div class="ring-container" id="ringContainer">
+          <div class="ring" id="photoRing">
+            <div class="ring-slide" data-img="assets/villa-1.jpeg.jpeg">
+              <div class="slide-bg"></div>
+            </div>
+            <div class="ring-slide" data-img="assets/villa-2.jpeg.jpeg">
+              <div class="slide-bg"></div>
+            </div>
+            <div class="ring-slide" data-img="assets/villa-3.jpeg.jpeg">
+              <div class="slide-bg"></div>
+            </div>
+            <div class="ring-slide" data-img="assets/villa-4.jpeg.jpeg">
+              <div class="slide-bg"></div>
+            </div>
+            <div class="ring-slide" data-img="assets/villa-5.jpeg.jpeg">
+              <div class="slide-bg"></div>
+            </div>
+            <div class="ring-slide" data-img="assets/villa-6.jpeg.jpeg">
+              <div class="slide-bg"></div>
+            </div>
+            <div class="ring-slide" data-img="assets/villa-7.jpeg.jpeg">
+              <div class="slide-bg"></div>
+            </div>
+            <div class="ring-slide" data-img="assets/villa-8.jpeg.jpeg">
+              <div class="slide-bg"></div>
+            </div>
+            <div class="ring-slide" data-img="assets/villa-9.jpeg.jpeg">
+              <div class="slide-bg"></div>
+            </div>
+            <div class="ring-slide" data-img="assets/villa-10.jpeg.jpeg">
+              <div class="slide-bg"></div>
+            </div>
+            <div class="ring-slide" data-img="assets/villa-11.jpeg.jpeg">
+              <div class="slide-bg"></div>
+            </div>
+            <div class="ring-slide" data-img="assets/villa-12.jpeg.jpeg">
+              <div class="slide-bg"></div>
+            </div>
+            <div class="ring-slide" data-img="assets/villa-13.jpeg.jpeg">
+              <div class="slide-bg"></div>
+            </div>
+            <div class="ring-slide" data-img="assets/villa-14.jpeg.jpeg">
+              <div class="slide-bg"></div>
+            </div>
+            <div class="ring-slide" data-img="assets/villa-15.jpeg.jpeg">
+              <div class="slide-bg"></div>
+            </div>
+          </div><!-- /ring -->
+        </div><!-- /ring-container -->
+
+        <div class="ring-hint" id="ringHint">
+          <i class="fas fa-arrows-left-right"></i>
+          <span>Drag to explore</span>
+        </div>
+
+        <button class="ring-arrow ring-arrow-left" id="ringPrev" aria-label="Previous"><i
+            class="fas fa-chevron-left"></i></button>
+        <button class="ring-arrow ring-arrow-right" id="ringNext" aria-label="Next"><i
+            class="fas fa-chevron-right"></i></button>
+      </div><!-- /ring-stage -->
+
+    </section>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox">
+      <button class="lightbox-close" id="lightboxClose">&#10005;</button>
+      <img src="" alt="" class="lightbox-img" id="lightboxImg" />
+      <p class="lightbox-caption" id="lightboxCaption"></p>
+    </div>
+
+    <!-- INQUIRY -->
+    <div style="background:var(--olive);">
+      <section id="inquiry" class="inquiry-section">
+
+        <div class="inquiry-left">
+          <span class="section-tag" style="display:inline-block;margin-bottom:18px;">RESERVATIONS</span>
+          <h2>Reserve Your <em>Escape</em></h2>
+          <p>GloryBagh Villa is an exclusive, private retreat — every stay is personally curated. Fill in your details
+            and our hospitality team will get back to you within a few hours to confirm availability and discuss your
+            requirements.</p>
+          <div class="inquiry-info">
+            <div class="info-item"><i class="fas fa-phone"></i><span>+91 98985 95891</span></div>
+            <div class="info-item"><i class="fas fa-envelope"></i><span>glorybaghvilla@gmail.com</span></div>
+            <div class="info-item"><i class="fas fa-map-marker-alt"></i><span>GloryBagh Villa, Udaipur, Rajasthan —
+                313001</span></div>
+
+          </div>
+        </div>
+
+        <div class="inquiry-right">
+          <form class="inquiry-form" id="inquiryForm" novalidate>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="fname">First Name</label>
+                <input type="text" id="fname" name="firstName" placeholder="Arjun" required />
+              </div>
+              <div class="form-group">
+                <label for="lname">Last Name</label>
+                <input type="text" id="lname" name="lastName" placeholder="Sharma" />
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" name="email" placeholder="arjun@email.com" required />
+              </div>
+              <div class="form-group">
+                <label for="phone">Phone Number</label>
+                <input type="tel" id="phone" name="phone" placeholder="+91 98765 43210" />
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="guests">Guests</label>
+                <select id="guests" name="guests">
+                  <option value="">Select</option>
+                  <option value="2">2 Guests</option>
+                  <option value="4">4 Guests</option>
+                  <option value="6">6 Guests</option>
+                  <option value="8">8+ Guests</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="occasion">Occasion</label>
+                <select id="occasion" name="occasion">
+                  <option value="">Select</option>
+                  <option value="leisure">Leisure Stay</option>
+                  <option value="wedding">Wedding / Celebration</option>
+                  <option value="honeymoon">Honeymoon</option>
+                  <option value="corporate">Corporate Retreat</option>
+                  <option value="other">Other</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="message">Special Requests</label>
+              <textarea id="message" name="message"
+                placeholder="Any special requests or questions? (Optional)"></textarea>
+            </div>
+            <div class="form-msg" id="formMsg"></div>
+            <button type="submit" class="form-submit" id="formSubmit">Send Inquiry</button>
+          </form>
+        </div>
+
+      </section>
+    </div>
+
+    <!-- CONTACT / FOOTER -->
+    <footer id="contact">
+      <div class="contact-inner">
+
+        <div class="contact-brand">
+          <div class="brand-name">GloryBagh</div>
+          <div class="brand-loc">VILLA · UDAIPUR, RAJASTHAN</div>
+          <p>An exclusive private estate in the City of Lakes — where timeless Rajasthani heritage and modern luxury
+            converge into an unforgettable retreat.</p>
+          <div class="contact-social">
+            <a href="#" class="social-btn" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="social-btn" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="social-btn" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+          </div>
+        </div>
+
+        <div class="contact-col">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="#hero">Home</a></li>
+            <li><a href="#gallery">Gallery</a></li>
+            <li><a href="#amenities">Amenities</a></li>
+            <li><a href="#inquiry">Book Now</a></li>
+          </ul>
+        </div>
+
+        <div class="contact-col contact-reach">
+          <h4>Reach Us</h4>
+          <p><i class="fas fa-phone"></i>+91 98985 95891</p>
+          <p><i class="fas fa-envelope"></i>glorybaghvilla@gmail.com</p>
+          <p><i class="fas fa-map-marker-alt"></i>GloryBagh Villa, Udaipur, Rajasthan</p>
+          <div style="margin-top:20px;border:1px solid rgba(201,168,76,0.2);overflow:hidden;width:100%;">
+            <!-- Replace with actual Google Maps embed for exact villa location -->
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m23!1m12!1m3!1d29365.492772787264!2d72.55818239999999!3d23.0719488!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m8!3e6!4m0!4m5!1s0x3967e500457eb3f5%3A0xe9b7dde4f1c30760!2sGloryBagh%20Villa%20Udaipur%2C%20amberi%20bridge%2C%20near%20pecific%20hospital%20%26%20college%2C%20Udaipur%2C%20Pratappura%2C%20Rajasthan%20NH%2076!3m2!1d24.6652064!2d73.7107582!5e0!3m2!1sen!2sin!4v1774034412180!5m2!1sen!2sin"
+              width="100%" height="150" style="border:0;filter:sepia(0.3) saturate(0.8);display:block;max-width:100%;"
+              allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+              title="GloryBagh Villa Location">
+            </iframe>
+          </div>
+        </div>
+
+      </div>
+
+      <div
+        style="border-top:1px solid rgba(201,168,76,0.1);padding:20px clamp(16px,4vw,48px);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;">
+        <p style="font-size:0.72rem;color:var(--text-dim);">&#169; 2025 GloryBagh Villa, Udaipur. All rights reserved.
+        </p>
+        <p style="font-size:0.72rem;color:var(--text-dim);">Crafted with <span style="color:var(--gold);">&#9670;</span>
+          for luxury</p>
+      </div>
+    </footer>
+
+  </div>
+
+  <!-- ── FLOATING CONTACT BUTTON (bottom-left) ── -->
+  <div class="float-contact-wrap" id="floatContact">
+
+    <!-- Option 1: Call -->
+    <!-- ▼ Replace YOUR_PHONE_NUMBER with actual number e.g. +919876543210 -->
+    <a href="tel:+919898595891" class="float-action call-btn" aria-label="Call us">
+      <i class="fas fa-phone"></i>
+      <span>Call Us</span>
+    </a>
+
+    <!-- Option 2: WhatsApp -->
+    <!-- ▼ Replace YOUR_PHONE_NUMBER with number (digits only, with country code, no +) e.g. 919876543210 -->
+    <a href="https://wa.me/919898595891?text=Hi%2C%20I%27d%20like%20to%20enquire%20about%20GloryBagh%20Villa%20Udaipur."
+      target="_blank" rel="noopener" class="float-action whatsapp-btn" aria-label="WhatsApp us">
+      <i class="fab fa-whatsapp"></i>
+      <span>WhatsApp</span>
+    </a>
+
+    <!-- Toggle button -->
+    <button class="float-toggle" id="floatToggle" aria-label="Contact options">
+      <i class="fas fa-headset ft-icon"></i>
+      <i class="fas fa-times ft-icon-close"></i>
+    </button>
+
+  </div>
+
+  <script src="js/main.js"></script>
+</body>
+
+</html>
