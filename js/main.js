@@ -331,6 +331,70 @@ const linkObserver = new IntersectionObserver((entries) => {
 }, { threshold: 0.1, rootMargin: '-10% 0px -80% 0px' });
 sections.forEach(s => linkObserver.observe(s));
 
+/* ── Amenity Strip — JS scroll + drag ───────────── */
+(function initAmStrip() {
+  const outer = document.querySelector('.am-scroll-outer');
+  const inner = document.querySelector('.am-scroll-inner');
+  if (!outer || !inner) return;
+
+  let x         = 0;        // current translateX
+  let speed     = 0.6;      // px per frame (auto)
+  let isDragging = false;
+  let dragStartX = 0;
+  let dragStartPos = 0;
+  let rafId;
+
+  // Total width of ONE set (half of duplicated inner)
+  function getHalfWidth() {
+    return inner.scrollWidth / 2;
+  }
+
+  function tick() {
+    if (!isDragging) {
+      x -= speed;
+      // seamless reset when first set fully scrolled
+      if (Math.abs(x) >= getHalfWidth()) x = 0;
+    }
+    inner.style.transform = `translateX(${x}px)`;
+    rafId = requestAnimationFrame(tick);
+  }
+  tick();
+
+  // ── Mouse drag ──
+  outer.addEventListener('mousedown', e => {
+    isDragging  = true;
+    dragStartX  = e.clientX;
+    dragStartPos = x;
+    outer.style.cursor = 'grabbing';
+    e.preventDefault();
+  });
+  window.addEventListener('mousemove', e => {
+    if (!isDragging) return;
+    const dx = e.clientX - dragStartX;
+    x = dragStartPos + dx;
+  });
+  window.addEventListener('mouseup', () => {
+    if (!isDragging) return;
+    isDragging = false;
+    outer.style.cursor = 'grab';
+  });
+
+  // ── Touch drag ──
+  outer.addEventListener('touchstart', e => {
+    isDragging   = true;
+    dragStartX   = e.touches[0].clientX;
+    dragStartPos = x;
+  }, { passive: true });
+  outer.addEventListener('touchmove', e => {
+    if (!isDragging) return;
+    const dx = e.touches[0].clientX - dragStartX;
+    x = dragStartPos + dx;
+  }, { passive: true });
+  outer.addEventListener('touchend', () => {
+    isDragging = false;
+  });
+})();
+
 /* ── Floating Contact Button ─────────────────────── */
 const floatContact = document.getElementById('floatContact');
 const floatToggle  = document.getElementById('floatToggle');
@@ -345,44 +409,5 @@ if (floatToggle && floatContact) {
     if (!floatContact.contains(e.target)) {
       floatContact.classList.remove('open');
     }
-  });
-}
-
-/* ── Amenity strip manual drag ── */
-const amStrip = document.querySelector('.am-scroll-outer');
-const amInner = document.querySelector('.am-scroll-inner');
-if (amStrip && amInner) {
-  let isDown = false, startX, scrollLeft;
-
-  amStrip.addEventListener('mousedown', e => {
-    isDown = true;
-    startX = e.pageX;
-    scrollLeft = amInner.style.transform 
-      ? parseFloat(amInner.style.transform.replace(/[^-\d.]/g,'')) : 0;
-    amInner.style.animationPlayState = 'paused';
-  });
-  window.addEventListener('mouseup', () => {
-    isDown = false;
-    amInner.style.animationPlayState = 'running';
-  });
-  window.addEventListener('mousemove', e => {
-    if (!isDown) return;
-    const x = e.pageX - startX;
-    amInner.style.transform = `translateX(${scrollLeft + x}px)`;
-  });
-
-  /* Touch support */
-  amStrip.addEventListener('touchstart', e => {
-    startX = e.touches[0].pageX;
-    scrollLeft = amInner.style.transform
-      ? parseFloat(amInner.style.transform.replace(/[^-\d.]/g,'')) : 0;
-    amInner.style.animationPlayState = 'paused';
-  }, { passive: true });
-  amStrip.addEventListener('touchmove', e => {
-    const x = e.touches[0].pageX - startX;
-    amInner.style.transform = `translateX(${scrollLeft + x}px)`;
-  }, { passive: true });
-  amStrip.addEventListener('touchend', () => {
-    amInner.style.animationPlayState = 'running';
   });
 }
