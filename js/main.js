@@ -347,3 +347,42 @@ if (floatToggle && floatContact) {
     }
   });
 }
+
+/* ── Amenity strip manual drag ── */
+const amStrip = document.querySelector('.am-scroll-outer');
+const amInner = document.querySelector('.am-scroll-inner');
+if (amStrip && amInner) {
+  let isDown = false, startX, scrollLeft;
+
+  amStrip.addEventListener('mousedown', e => {
+    isDown = true;
+    startX = e.pageX;
+    scrollLeft = amInner.style.transform 
+      ? parseFloat(amInner.style.transform.replace(/[^-\d.]/g,'')) : 0;
+    amInner.style.animationPlayState = 'paused';
+  });
+  window.addEventListener('mouseup', () => {
+    isDown = false;
+    amInner.style.animationPlayState = 'running';
+  });
+  window.addEventListener('mousemove', e => {
+    if (!isDown) return;
+    const x = e.pageX - startX;
+    amInner.style.transform = `translateX(${scrollLeft + x}px)`;
+  });
+
+  /* Touch support */
+  amStrip.addEventListener('touchstart', e => {
+    startX = e.touches[0].pageX;
+    scrollLeft = amInner.style.transform
+      ? parseFloat(amInner.style.transform.replace(/[^-\d.]/g,'')) : 0;
+    amInner.style.animationPlayState = 'paused';
+  }, { passive: true });
+  amStrip.addEventListener('touchmove', e => {
+    const x = e.touches[0].pageX - startX;
+    amInner.style.transform = `translateX(${scrollLeft + x}px)`;
+  }, { passive: true });
+  amStrip.addEventListener('touchend', () => {
+    amInner.style.animationPlayState = 'running';
+  });
+}
