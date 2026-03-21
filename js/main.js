@@ -337,62 +337,81 @@ sections.forEach(s => linkObserver.observe(s));
   const inner = document.querySelector('.am-scroll-inner');
   if (!outer || !inner) return;
 
-  let x         = 0;        // current translateX
-  let speed     = 0.6;      // px per frame (auto)
+  let x          = 0;
+  let speed      = 0.7;
   let isDragging = false;
-  let dragStartX = 0;
-  let dragStartPos = 0;
-  let rafId;
+  let startX     = 0;
+  let startPos   = 0;
+  let lastX      = 0;
+  let velocity   = 0;
+  let lastTime   = 0;
 
-  // Total width of ONE set (half of duplicated inner)
   function getHalfWidth() {
     return inner.scrollWidth / 2;
   }
 
+  // ── RAF loop ──
   function tick() {
     if (!isDragging) {
-      x -= speed;
-      // seamless reset when first set fully scrolled
-      if (Math.abs(x) >= getHalfWidth()) x = 0;
+      // momentum decay
+      if (Math.abs(velocity) > 0.1) {
+        x += velocity;
+        velocity *= 0.95;
+      } else {
+        velocity = 0;
+        x -= speed;
+      }
+      // seamless reset
+      const half = getHalfWidth();
+      if (x <= -half) x += half;
+      if (x > 0)      x -= half;
     }
     inner.style.transform = `translateX(${x}px)`;
-    rafId = requestAnimationFrame(tick);
+    requestAnimationFrame(tick);
   }
   tick();
 
-  // ── Mouse drag ──
-  outer.addEventListener('mousedown', e => {
-    isDragging  = true;
-    dragStartX  = e.clientX;
-    dragStartPos = x;
+  // ── Get clientX from mouse or touch ──
+  function getX(e) {
+    return e.touches ? e.touches[0].clientX : e.clientX;
+  }
+
+  function onDragStart(e) {
+    isDragging = true;
+    startX     = getX(e);
+    startPos   = x;
+    lastX      = startX;
+    lastTime   = Date.now();
+    velocity   = 0;
     outer.style.cursor = 'grabbing';
-    e.preventDefault();
-  });
-  window.addEventListener('mousemove', e => {
+  }
+
+  function onDragMove(e) {
     if (!isDragging) return;
-    const dx = e.clientX - dragStartX;
-    x = dragStartPos + dx;
-  });
-  window.addEventListener('mouseup', () => {
+    const cx  = getX(e);
+    const now = Date.now();
+    const dt  = now - lastTime || 1;
+    velocity  = (cx - lastX) / dt * 12;
+    lastX     = cx;
+    lastTime  = now;
+    x = startPos + (cx - startX);
+  }
+
+  function onDragEnd() {
     if (!isDragging) return;
     isDragging = false;
     outer.style.cursor = 'grab';
-  });
+  }
 
-  // ── Touch drag ──
-  outer.addEventListener('touchstart', e => {
-    isDragging   = true;
-    dragStartX   = e.touches[0].clientX;
-    dragStartPos = x;
-  }, { passive: true });
-  outer.addEventListener('touchmove', e => {
-    if (!isDragging) return;
-    const dx = e.touches[0].clientX - dragStartX;
-    x = dragStartPos + dx;
-  }, { passive: true });
-  outer.addEventListener('touchend', () => {
-    isDragging = false;
-  });
+  // Mouse
+  outer.addEventListener('mousedown',  onDragStart);
+  window.addEventListener('mousemove', onDragMove);
+  window.addEventListener('mouseup',   onDragEnd);
+
+  // Touch
+  outer.addEventListener('touchstart', onDragStart, { passive: true });
+  outer.addEventListener('touchmove',  onDragMove,  { passive: true });
+  outer.addEventListener('touchend',   onDragEnd);
 })();
 
 /* ── Floating Contact Button ─────────────────────── */
