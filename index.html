@@ -43,11 +43,12 @@
         <!-- LOGO PLACEHOLDER: replace this div with <img src="assets/logo.png" class="logo-img" alt="GloryBagh Villa"> when you have a logo -->
         <div class="logo-placeholder" id="logoArea">
           <span class="logo-text">GloryBagh</span>
-          <span class="logo-sub">VILLA · UDAIPUR</span>
+
         </div>
       </div>
       <ul class="nav-links" id="navLinks">
         <li><a href="#hero" class="nav-link">Home</a></li>
+        <li><a href="#about" class="nav-link">About</a></li>
         <li><a href="#gallery" class="nav-link">Gallery</a></li>
         <li><a href="#amenities" class="nav-link">Amenities</a></li>
         <li><a href="#inquiry" class="nav-link">Book Now</a></li>
@@ -63,6 +64,7 @@
       <button class="drawer-close" id="drawerClose">&#10005;</button>
       <ul>
         <li><a href="#hero" onclick="closeDrawer()">Home</a></li>
+        <li><a href="#about" onclick="closeDrawer()">About</a></li>
         <li><a href="#gallery" onclick="closeDrawer()">Gallery</a></li>
         <li><a href="#amenities" onclick="closeDrawer()">Amenities</a></li>
         <li><a href="#inquiry" onclick="closeDrawer()">Book Now</a></li>
@@ -87,95 +89,59 @@
         </div>
       </div>
       <div class="hero-scroll-hint">
-        <span>Scroll</span>
         <div class="scroll-line"></div>
       </div>
     </section>
 
-    <!-- MARQUEE -->
-    <div class="marquee-strip">
-      <div class="marquee-track">
-        <span>Exclusive Villa &nbsp;&#xB7;&nbsp; Private Pool &nbsp;&#xB7;&nbsp; Lake Views &nbsp;&#xB7;&nbsp;
-          Rajasthani Heritage &nbsp;&#xB7;&nbsp; Bespoke Hospitality &nbsp;&#xB7;&nbsp; Udaipur &nbsp;&#xB7;&nbsp;
-          Luxury Retreat &nbsp;&#xB7;&nbsp; </span>
-        <span>Exclusive Villa &nbsp;&#xB7;&nbsp; Private Pool &nbsp;&#xB7;&nbsp; Lake Views &nbsp;&#xB7;&nbsp;
-          Rajasthani Heritage &nbsp;&#xB7;&nbsp; Bespoke Hospitality &nbsp;&#xB7;&nbsp; Udaipur &nbsp;&#xB7;&nbsp;
-          Luxury Retreat &nbsp;&#xB7;&nbsp; </span>
-      </div>
-    </div>
+    <!-- ABOUT US -->
+    <section id="about" class="about-section">
+      <div class="about-bg-img"></div>
+      <div class="about-container">
 
-    <!-- AMENITIES -->
-    <section id="amenities" class="amenities-section">
-      <div class="section-header">
-        <span class="section-tag reveal-up">VILLA FEATURES</span>
-        <h2 class="section-title reveal-up delay-1">Crafted for <em>Connoisseurs</em></h2>
-        <p class="section-sub reveal-up delay-2">Every corner of GloryBagh is designed to offer an unparalleled sensory
-          experience.</p>
-      </div>
-      <div class="amenities-grid">
-
-        <div class="amenity-card reveal-up">
-          <span class="amenity-num">01</span>
-          <div class="amenity-icon"><i class="fas fa-bed"></i></div>
-          <div class="amenity-title-wrap">
-            <h3>4 Bedrooms</h3>
-          </div>
-          <p>Four elegantly furnished bedrooms designed for absolute comfort, each exuding the warmth of Rajasthani
-            heritage.</p>
+        <div class="about-tag-wrap reveal-up">
+          <span class="section-tag">OUR STORY</span>
         </div>
 
-        <div class="amenity-card reveal-up delay-1">
-          <span class="amenity-num">02</span>
-          <div class="amenity-icon"><i class="fas fa-water"></i></div>
-          <div class="amenity-title-wrap">
-            <h3>2 Private Pools</h3>
-          </div>
-          <p>Two exclusive swimming pools — your personal oasis under the open Udaipur sky, completely private.</p>
+        <h2 class="about-heading reveal-up delay-1">About <em>GloryBagh</em></h2>
+
+        <p class="about-sub reveal-up delay-2">
+          Nestled in the heart of Udaipur — the City of Lakes — GloryBagh Villa is a private
+          estate where Rajasthani heritage and contemporary luxury are woven together seamlessly.
+          Born from a vision to offer discerning travellers an escape that feels like home, yet
+          grander in every way, GloryBagh is more than a villa — it is an experience curated
+          for those who seek the extraordinary.
+        </p>
+
+        <p class="about-sub reveal-up delay-3">
+          With four elegantly appointed bedrooms, twin private pools, a lush garden, and
+          a dedicated on-site cook crafting authentic local cuisine, every moment here is
+          designed to linger in memory long after you leave. Our team is committed to ensuring
+          that your stay is personal, private, and utterly unforgettable.
+        </p>
+
+        <div class="about-divider reveal-up delay-3">
+          <span class="about-divider-line"></span>
+          <i class="fas fa-diamond about-divider-gem"></i>
+          <span class="about-divider-line"></span>
         </div>
 
-        <div class="amenity-card reveal-up delay-2">
-          <span class="amenity-num">03</span>
-          <div class="amenity-icon"><i class="fas fa-leaf"></i></div>
-          <div class="amenity-title-wrap">
-            <h3>Private Garden</h3>
-          </div>
-          <p>A lush private garden — the perfect setting for morning chai, evening gatherings, or quiet moments of
-            solitude.</p>
-        </div>
-
-        <div class="amenity-card reveal-up delay-3">
-          <span class="amenity-num">04</span>
-          <div class="amenity-icon"><i class="fas fa-utensils"></i></div>
-          <div class="amenity-title-wrap">
-            <h3>Cook On Site</h3>
-          </div>
-          <p>A dedicated cook on premises to prepare authentic Rajasthani delicacies and your favourite meals, fresh
-            every day.</p>
-        </div>
-
-        <div class="amenity-card reveal-up delay-4">
-          <span class="amenity-num">05</span>
-          <div class="amenity-icon"><i class="fas fa-car"></i></div>
-          <div class="amenity-title-wrap">
-            <h3>Private Parking</h3>
-          </div>
-          <p>Secure, dedicated parking within the villa premises — ample space for multiple vehicles, stress-free.</p>
-        </div>
-
-        <div class="amenity-card reveal-up" style="transition-delay:0.75s">
-          <span class="amenity-num">06</span>
-          <div class="amenity-icon"><i class="fas fa-shield-alt"></i></div>
-          <div class="amenity-title-wrap">
-            <h3>24/7 Security</h3>
-          </div>
-          <p>Round-the-clock security ensuring complete peace of mind — your safety and privacy are our highest
-            priority.</p>
+        <div class="about-social reveal-up delay-4">
+          <a href="https://www.instagram.com/glory_bagh_2025?igsh=MWR4Y3VoY25oeWd5ag%3D%3D" target="_blank"
+            rel="noopener" class="about-social-btn" aria-label="Instagram">
+            <i class="fab fa-instagram"></i>
+          </a>
+          <a href="#" class="about-social-btn" aria-label="WhatsApp">
+            <i class="fab fa-whatsapp"></i>
+          </a>
+          <a href="#inquiry" class="about-social-btn about-book-btn">
+            Book Now &nbsp;<i class="fas fa-arrow-right"></i>
+          </a>
         </div>
 
       </div>
     </section>
 
-    <!-- HOLOGRAPHIC GALLERY -->
+    <!-- GALLERY — Thumbnail Carousel -->
     <section id="gallery" class="gallery-section">
       <div class="section-header">
         <span class="section-tag reveal-up">THE VILLA</span>
@@ -185,73 +151,84 @@
 
       <!--
         HOW TO ADD PHOTOS:
-        Update data-img and data-title on each .ring-slide.
-        Images go in assets/images/ — up to 10 slides supported.
+        Add more .tc-slide items with data-img="assets/your-image.jpg" and data-title="Caption".
+        Thumbnails are generated automatically from data-img.
       -->
+      <div class="tc-wrap reveal-up delay-1">
 
-      <!-- 3D RING CAROUSEL STAGE -->
-      <div class="ring-stage" id="ringStage">
-        <div class="ring-container" id="ringContainer">
-          <div class="ring" id="photoRing">
-            <div class="ring-slide" data-img="assets/villa-1.jpeg.jpeg">
-              <div class="slide-bg"></div>
+        <!-- Main image viewport -->
+        <div class="tc-main" id="tcMain">
+          <div class="tc-track" id="tcTrack">
+            <div class="tc-slide" data-img="assets/villa-1.jpeg.jpeg">
+              <img src="assets/villa-1.jpeg.jpeg" alt="Image" loading="lazy" />
             </div>
-            <div class="ring-slide" data-img="assets/villa-2.jpeg.jpeg">
-              <div class="slide-bg"></div>
+            <div class="tc-slide" data-img="assets/villa-2.jpeg.jpeg">
+              <img src="assets/villa-2.jpeg.jpeg" alt="Image" loading="lazy" />
             </div>
-            <div class="ring-slide" data-img="assets/villa-3.jpeg.jpeg">
-              <div class="slide-bg"></div>
+            <div class="tc-slide" data-img="assets/villa-3.jpeg.jpeg">
+              <img src="assets/villa-3.jpeg.jpeg" alt="Image" loading="lazy" />
             </div>
-            <div class="ring-slide" data-img="assets/villa-4.jpeg.jpeg">
-              <div class="slide-bg"></div>
+            <div class="tc-slide" data-img="assets/villa-4.jpeg.jpeg">
+              <img src="assets/villa-4.jpeg.jpeg" alt="Image" loading="lazy" />
             </div>
-            <div class="ring-slide" data-img="assets/villa-5.jpeg.jpeg">
-              <div class="slide-bg"></div>
+            <div class="tc-slide" data-img="assets/villa-5.jpeg.jpeg">
+              <img src="assets/villa-5.jpeg.jpeg" alt="Image" loading="lazy" />
             </div>
-            <div class="ring-slide" data-img="assets/villa-6.jpeg.jpeg">
-              <div class="slide-bg"></div>
+            <div class="tc-slide" data-img="assets/villa-6.jpeg.jpeg">
+              <img src="assets/villa-6.jpeg.jpeg" alt="Image" loading="lazy" />
             </div>
-            <div class="ring-slide" data-img="assets/villa-7.jpeg.jpeg">
-              <div class="slide-bg"></div>
+            <div class="tc-slide" data-img="assets/villa-7.jpeg.jpeg">
+              <img src="assets/villa-7.jpeg.jpeg" alt="Image" loading="lazy" />
             </div>
-            <div class="ring-slide" data-img="assets/villa-8.jpeg.jpeg">
-              <div class="slide-bg"></div>
+            <div class="tc-slide" data-img="assets/villa-8.jpeg.jpeg">
+              <img src="assets/villa-8.jpeg.jpeg" alt="Image" loading="lazy" />
             </div>
-            <div class="ring-slide" data-img="assets/villa-9.jpeg.jpeg">
-              <div class="slide-bg"></div>
+            <div class="tc-slide" data-img="assets/villa-9.jpeg.jpeg">
+              <img src="assets/villa-9.jpeg.jpeg" alt="Image" loading="lazy" />
             </div>
-            <div class="ring-slide" data-img="assets/villa-10.jpeg.jpeg">
-              <div class="slide-bg"></div>
+            <div class="tc-slide" data-img="assets/villa-10.jpeg.jpeg">
+              <img src="assets/villa-10.jpeg.jpeg" alt="Image" loading="lazy" />
             </div>
-            <div class="ring-slide" data-img="assets/villa-11.jpeg.jpeg">
-              <div class="slide-bg"></div>
+            <div class="tc-slide" data-img="assets/villa-11.jpeg.jpeg">
+              <img src="assets/villa-11.jpeg.jpeg" alt="Image" loading="lazy" />
             </div>
-            <div class="ring-slide" data-img="assets/villa-12.jpeg.jpeg">
-              <div class="slide-bg"></div>
+            <div class="tc-slide" data-img="assets/villa-12.jpeg.jpeg">
+              <img src="assets/villa-12.jpeg.jpeg" alt="Image" loading="lazy" />
             </div>
-            <div class="ring-slide" data-img="assets/villa-13.jpeg.jpeg">
-              <div class="slide-bg"></div>
+            <div class="tc-slide" data-img="assets/villa-13.jpeg.jpeg">
+              <img src="assets/villa-13.jpeg.jpeg" alt="Image" loading="lazy" />
             </div>
-            <div class="ring-slide" data-img="assets/villa-14.jpeg.jpeg">
-              <div class="slide-bg"></div>
+            <div class="tc-slide" data-img="assets/villa-14.jpeg.jpeg">
+              <img src="assets/villa-14.jpeg.jpeg" alt="Image" loading="lazy" />
             </div>
-            <div class="ring-slide" data-img="assets/villa-15.jpeg.jpeg">
-              <div class="slide-bg"></div>
+            <div class="tc-slide" data-img="assets/villa-15.jpeg.jpeg">
+              <img src="assets/villa-15.jpeg.jpeg" alt="Image" loading="lazy" />
             </div>
-          </div><!-- /ring -->
-        </div><!-- /ring-container -->
+          </div><!-- /tc-track -->
 
-        <div class="ring-hint" id="ringHint">
-          <i class="fas fa-arrows-left-right"></i>
-          <span>Drag to explore</span>
+          <!-- Overlay caption -->
+          <div class="tc-caption" id="tcCaption"></div>
+
+          <!-- Slide counter -->
+          <div class="tc-counter" id="tcCounter">1 / 15</div>
+
+          <!-- Nav arrows -->
+          <button class="tc-arrow tc-arrow-left" id="tcPrev" aria-label="Previous">
+            <i class="fas fa-chevron-left"></i>
+          </button>
+          <button class="tc-arrow tc-arrow-right" id="tcNext" aria-label="Next">
+            <i class="fas fa-chevron-right"></i>
+          </button>
+        </div><!-- /tc-main -->
+
+        <!-- Thumbnail strip -->
+        <div class="tc-thumbs-wrap">
+          <div class="tc-thumbs" id="tcThumbs">
+            <!-- Thumbnails injected by JS -->
+          </div>
         </div>
 
-        <button class="ring-arrow ring-arrow-left" id="ringPrev" aria-label="Previous"><i
-            class="fas fa-chevron-left"></i></button>
-        <button class="ring-arrow ring-arrow-right" id="ringNext" aria-label="Next"><i
-            class="fas fa-chevron-right"></i></button>
-      </div><!-- /ring-stage -->
-
+      </div><!-- /tc-wrap -->
     </section>
 
     <!-- Lightbox -->
@@ -260,6 +237,90 @@
       <img src="" alt="" class="lightbox-img" id="lightboxImg" />
       <p class="lightbox-caption" id="lightboxCaption"></p>
     </div>
+
+    <!-- AMENITIES -->
+    <section id="amenities" class="amenities-section">
+
+      <!-- Section header -->
+      <div class="section-header">
+        <span class="section-tag reveal-up">VILLA FEATURES</span>
+        <h2 class="section-title reveal-up delay-1">Crafted for <em>Connoisseurs</em></h2>
+        <p class="section-sub reveal-up delay-2">Every corner of GloryBagh is designed to offer an unparalleled sensory
+          experience.</p>
+      </div>
+
+      <!-- Auto-scroll amenity cards strip -->
+      <div class="am-scroll-outer reveal-up delay-1">
+        <div class="am-scroll-inner">
+
+          <!-- SET 1 -->
+          <div class="am-card">
+            <div class="am-card-icon"><i class="fas fa-bed"></i></div>
+            <h3>4 Bedrooms</h3>
+            <p>Elegantly furnished rooms exuding the warmth of Rajasthani heritage.</p>
+          </div>
+          <div class="am-card">
+            <div class="am-card-icon"><i class="fas fa-water"></i></div>
+            <h3>2 Private Pools</h3>
+            <p>Your personal oasis under the open Udaipur sky, completely private.</p>
+          </div>
+          <div class="am-card">
+            <div class="am-card-icon"><i class="fas fa-leaf"></i></div>
+            <h3>Private Garden</h3>
+            <p>Perfect for morning chai, evening gatherings, or quiet solitude.</p>
+          </div>
+          <div class="am-card">
+            <div class="am-card-icon"><i class="fas fa-utensils"></i></div>
+            <h3>Cook On Site</h3>
+            <p>Authentic Rajasthani delicacies prepared fresh every single day.</p>
+          </div>
+          <div class="am-card">
+            <div class="am-card-icon"><i class="fas fa-car"></i></div>
+            <h3>Private Parking</h3>
+            <p>Secure dedicated parking — ample space for multiple vehicles.</p>
+          </div>
+          <div class="am-card">
+            <div class="am-card-icon"><i class="fas fa-shield-alt"></i></div>
+            <h3>24/7 Security</h3>
+            <p>Round-the-clock security — your safety and privacy are paramount.</p>
+          </div>
+
+          <!-- SET 2 — duplicate for seamless loop -->
+          <div class="am-card">
+            <div class="am-card-icon"><i class="fas fa-bed"></i></div>
+            <h3>4 Bedrooms</h3>
+            <p>Elegantly furnished rooms exuding the warmth of Rajasthani heritage.</p>
+          </div>
+          <div class="am-card">
+            <div class="am-card-icon"><i class="fas fa-water"></i></div>
+            <h3>2 Private Pools</h3>
+            <p>Your personal oasis under the open Udaipur sky, completely private.</p>
+          </div>
+          <div class="am-card">
+            <div class="am-card-icon"><i class="fas fa-leaf"></i></div>
+            <h3>Private Garden</h3>
+            <p>Perfect for morning chai, evening gatherings, or quiet solitude.</p>
+          </div>
+          <div class="am-card">
+            <div class="am-card-icon"><i class="fas fa-utensils"></i></div>
+            <h3>Cook On Site</h3>
+            <p>Authentic Rajasthani delicacies prepared fresh every single day.</p>
+          </div>
+          <div class="am-card">
+            <div class="am-card-icon"><i class="fas fa-car"></i></div>
+            <h3>Private Parking</h3>
+            <p>Secure dedicated parking — ample space for multiple vehicles.</p>
+          </div>
+          <div class="am-card">
+            <div class="am-card-icon"><i class="fas fa-shield-alt"></i></div>
+            <h3>24/7 Security</h3>
+            <p>Round-the-clock security — your safety and privacy are paramount.</p>
+          </div>
+
+        </div><!-- /am-scroll-inner -->
+      </div><!-- /am-scroll-outer -->
+
+    </section>
 
     <!-- INQUIRY -->
     <div style="background:var(--olive);">
@@ -273,7 +334,10 @@
             requirements.</p>
           <div class="inquiry-info">
             <div class="info-item"><i class="fas fa-phone"></i><span>+91 98985 95891</span></div>
-            <div class="info-item"><i class="fas fa-envelope"></i><span>glorybaghvilla@gmail.com</span></div>
+            <div class="info-item"><i class="fas fa-envelope"></i><span>
+
+                glorybaghvilla@gmail.com</span>
+            </div>
             <div class="info-item"><i class="fas fa-map-marker-alt"></i><span>GloryBagh Villa, Udaipur, Rajasthan —
                 313001</span></div>
 
@@ -310,19 +374,33 @@
                   <option value="2">2 Guests</option>
                   <option value="4">4 Guests</option>
                   <option value="6">6 Guests</option>
-                  <option value="8">8+ Guests</option>
+                  <option value="8">8 Guests</option>
+                  <option value="10">10 Guests</option>
+                  <option value="12">12+ Guests</option>
+                  <option value="custom">Custom (type below)</option>
                 </select>
+                <input type="number" id="guestsCustom" name="guestsCustom" placeholder="Enter exact number of guests"
+                  min="1" max="50" style="display:none; margin-top:10px;" />
               </div>
               <div class="form-group">
                 <label for="occasion">Occasion</label>
                 <select id="occasion" name="occasion">
-                  <option value="">Select</option>
+                  <option value="">Select Occasion</option>
                   <option value="leisure">Leisure Stay</option>
                   <option value="wedding">Wedding / Celebration</option>
-                  <option value="honeymoon">Honeymoon</option>
+                  <option value="birthday">Birthday Celebration</option>
+                  <option value="anniversary">Anniversary</option>
+                  <option value="bachelorette">Bachelorette / Bachelor Party</option>
+                  <option value="engagement">Engagement Ceremony</option>
                   <option value="corporate">Corporate Retreat</option>
-                  <option value="other">Other</option>
+                  <option value="team-offsite">Team Offsite</option>
+                  <option value="business-meeting">Business Meeting</option>
+                  <option value="family-reunion">Family Reunion</option>
+                  <option value="other">Other (specify below)</option>
                 </select>
+
+                <input type="text" id="occasionCustom" name="occasionCustom" placeholder="Please describe your occasion"
+                  style="display:none; margin-top:10px;" />
               </div>
             </div>
             <div class="form-group">
@@ -348,8 +426,8 @@
           <p>An exclusive private estate in the City of Lakes — where timeless Rajasthani heritage and modern luxury
             converge into an unforgettable retreat.</p>
           <div class="contact-social">
-            <a href="#" class="social-btn" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-            <a href="#" class="social-btn" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://www.instagram.com/glory_bagh_2025?igsh=MWR4Y3VoY25oeWd5ag%3D%3D" target="_blank"
+              rel="noopener" class="social-btn" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
             <a href="#" class="social-btn" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
           </div>
         </div>
@@ -358,6 +436,7 @@
           <h4>Quick Links</h4>
           <ul>
             <li><a href="#hero">Home</a></li>
+            <li><a href="#about">About</a></li>
             <li><a href="#gallery">Gallery</a></li>
             <li><a href="#amenities">Amenities</a></li>
             <li><a href="#inquiry">Book Now</a></li>
@@ -367,7 +446,8 @@
         <div class="contact-col contact-reach">
           <h4>Reach Us</h4>
           <p><i class="fas fa-phone"></i>+91 98985 95891</p>
-          <p><i class="fas fa-envelope"></i>glorybaghvilla@gmail.com</p>
+          <p><i class="fas fa-envelope"></i><a href="/cdn-cgi/l/email-protection" class="__cf_email__"
+              data-cfemail="2b4c47445952494a4c435d4247474a6b4c464a424705484446">glorybaghvilla@gmail.com</a></p>
           <p><i class="fas fa-map-marker-alt"></i>GloryBagh Villa, Udaipur, Rajasthan</p>
           <div style="margin-top:20px;border:1px solid rgba(201,168,76,0.2);overflow:hidden;width:100%;">
             <!-- Replace with actual Google Maps embed for exact villa location -->
@@ -413,13 +493,14 @@
 
     <!-- Toggle button -->
     <button class="float-toggle" id="floatToggle" aria-label="Contact options">
-      <i class="fas fa-headset ft-icon"></i>
+      <i class="fas fa-phone ft-icon"></i>
       <i class="fas fa-times ft-icon-close"></i>
     </button>
 
-  </div>
+  </div><!-- /float-contact-wrap -->
 
   <script src="js/main.js"></script>
+
 </body>
 
 </html>
