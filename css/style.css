@@ -368,13 +368,11 @@ body {
   gap: 24px;
   width: max-content;
   padding: 12px 0 20px;
-  animation: am-scroll 18s linear infinite;
+  will-change: transform;
 }
 
 .am-scroll-outer { cursor: grab; }
 .am-scroll-outer:active { cursor: grabbing; }
-
-.am-scroll-inner:hover { animation-play-state: paused; }
 
 /* ── Individual amenity card ── */
 .am-card {
