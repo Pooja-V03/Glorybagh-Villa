@@ -355,13 +355,12 @@ body {
   overflow: hidden;
   mask: linear-gradient(90deg, transparent 0%, black 6%, black 94%, transparent 100%);
   -webkit-mask: linear-gradient(90deg, transparent 0%, black 6%, black 94%, transparent 100%);
+  cursor: grab;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: pan-y;
 }
-
-/* ── Scrolling track ── */
-@keyframes am-scroll {
-  0%   { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
-}
+.am-scroll-outer:active { cursor: grabbing; }
 
 .am-scroll-inner {
   display: flex;
@@ -369,10 +368,11 @@ body {
   width: max-content;
   padding: 12px 0 20px;
   will-change: transform;
+  pointer-events: none;
 }
 
-.am-scroll-outer { cursor: grab; }
-.am-scroll-outer:active { cursor: grabbing; }
+/* cards need pointer-events for hover */
+.am-card { pointer-events: all; }
 
 /* ── Individual amenity card ── */
 .am-card {
