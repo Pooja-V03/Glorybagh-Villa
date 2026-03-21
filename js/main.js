@@ -92,199 +92,106 @@ function createParticles() {
 }
 createParticles();
 
-/* ── 3D Ring Carousel ───────────────────────────── */
-(function initRing() {
-  const ring      = document.getElementById('photoRing');
-  const stage     = document.getElementById('ringStage');
-  const hint      = document.getElementById('ringHint');
-  const prevBtn   = document.getElementById('ringPrev');
-  const nextBtn   = document.getElementById('ringNext');
-  if (!ring || !stage) return;
+/* ── Thumbnail Carousel ─────────────────────────── */
+(function initCarousel() {
+  const track    = document.getElementById('tcTrack');
+  const thumbsEl = document.getElementById('tcThumbs');
+  const caption  = document.getElementById('tcCaption');
+  const counter  = document.getElementById('tcCounter');
+  const prevBtn  = document.getElementById('tcPrev');
+  const nextBtn  = document.getElementById('tcNext');
+  const mainEl   = document.getElementById('tcMain');
+  if (!track || !thumbsEl) return;
 
-  const slides    = Array.from(ring.querySelectorAll('.ring-slide'));
-  const N         = slides.length;             // 15
-  const angleStep = 360 / N;                   // 24°
+  const slides = Array.from(track.querySelectorAll('.tc-slide'));
+  const total  = slides.length;
+  let current  = 0;
+  let autoId   = null;
 
-  // Dynamic radius based on actual rendered slide width (responsive)
-  function getRadius() {
-    const w = ring.querySelector('.ring-slide')?.offsetWidth || 220;
-    return Math.round((w / 2) / Math.tan(Math.PI / N)) + Math.round(w * 0.45);
-  }
-  let radius = getRadius();
-
-  // Position each panel around the ring
-  function positionSlides() {
-    radius = getRadius();
-    slides.forEach((slide, i) => {
-      const angle = angleStep * i;
-      slide.style.transform = `rotateY(${angle}deg) translateZ(${radius}px)`;
-    });
-  }
-  positionSlides();
-
-  // Reposition on resize (handles orientation change)
-  window.addEventListener('resize', () => {
-    positionSlides();
-  });
-
+  // ── Build thumbnails ──
   slides.forEach((slide, i) => {
-    const angle = angleStep * i;
-    slide.style.transform = `rotateY(${angle}deg) translateZ(${radius}px)`;
+    const img   = slide.querySelector('img');
+    const src   = img ? img.src : '';
+    const title = slide.dataset.title || '';
 
-    // Set background image
-    const imgSrc = slide.dataset.img;
-    slide.querySelector('.slide-bg').style.backgroundImage = `url('${imgSrc}')`;
-
-    // Mark missing images as no-img
-    const tester = new Image();
-    tester.onerror = () => slide.classList.add('no-img');
-    tester.src = imgSrc;
+    const thumb = document.createElement('button');
+    thumb.className = 'tc-thumb' + (i === 0 ? ' active' : '');
+    thumb.setAttribute('aria-label', title || `Photo ${i + 1}`);
+    thumb.innerHTML = `<img src="${src}" alt="${title}" loading="lazy" />`;
+    thumb.addEventListener('click', () => goTo(i));
+    thumbsEl.appendChild(thumb);
   });
 
-  let currentAngle  = 0;    // current rotationY of ring
-  let targetAngle   = 0;    // where we're tweening to
-  let animId        = null;
-  let isDragging    = false;
-  let startX        = 0;
-  let startAngle    = 0;
-  let velocity      = 0;
-  let lastX         = 0;
-  let lastTime      = 0;
+  const thumbButtons = Array.from(thumbsEl.querySelectorAll('.tc-thumb'));
 
-  // Auto-rotate
-  let autoRotate = true;
-  let autoTimer  = null;
+  // ── Go to slide ──
+  function goTo(idx) {
+    if (idx < 0) idx = total - 1;
+    if (idx >= total) idx = 0;
+    current = idx;
 
-  function scheduleAuto() {
-    clearTimeout(autoTimer);
-    autoTimer = setTimeout(() => { autoRotate = true; }, 3000);
-  }
+    track.style.transform = `translateX(-${current * 100}%)`;
 
-  function setAngle(angle) {
-    targetAngle = angle;
-    currentAngle = angle;
-    ring.style.transform = `rotateY(${angle}deg)`;
-    updateParallax(angle);
-  }
+    // Update caption & counter
+    caption.textContent  = slides[current].dataset.title || '';
+    counter.textContent  = `${current + 1} / ${total}`;
 
-  function updateParallax(angle) {
-    slides.forEach((slide, i) => {
-      const bg = slide.querySelector('.slide-bg');
-      const panelAngle = angleStep * i;
-      const diff = ((angle + panelAngle) % 360 + 360) % 360;
-      const offset = (diff / 360) * 60 - 30; // ±30px parallax
-      bg.style.transform = `translateX(${offset}px)`;
-    });
-  }
-
-  // Smooth lerp animation
-  function animate() {
-    if (autoRotate && !isDragging) {
-      targetAngle -= 0.12; // slow auto-spin
+    // Update thumb active state + scroll into view
+    thumbButtons.forEach((t, i) => t.classList.toggle('active', i === current));
+    // Scroll thumbnail into view within the strip only (not the page)
+    const thumbStrip = document.getElementById('tcThumbs');
+    if (thumbStrip) {
+      const btn = thumbButtons[current];
+      const stripRect = thumbStrip.getBoundingClientRect();
+      const btnRect   = btn.getBoundingClientRect();
+      const offset    = btn.offsetLeft - thumbStrip.offsetLeft - (thumbStrip.offsetWidth / 2) + (btn.offsetWidth / 2);
+      thumbStrip.scrollTo({ left: offset, behavior: 'smooth' });
     }
-
-    currentAngle += (targetAngle - currentAngle) * 0.06;
-    ring.style.transform = `rotateY(${currentAngle}deg)`;
-    updateParallax(currentAngle);
-    animId = requestAnimationFrame(animate);
   }
-  animate();
-
-  // ── Drag (mouse + touch) ──
-  function dragStart(e) {
-    isDragging   = true;
-    autoRotate   = false;
-    startX       = e.type.includes('touch') ? e.touches[0].clientX : e.clientX;
-    startAngle   = targetAngle;
-    lastX        = startX;
-    lastTime     = Date.now();
-    velocity     = 0;
-
-    // Hide hint on first drag
-    if (hint) { hint.style.opacity = '0'; hint.style.pointerEvents = 'none'; }
-
-    ring.style.cursor = 'grabbing';
-    stage.style.cursor = 'grabbing';
-  }
-
-  function dragMove(e) {
-    if (!isDragging) return;
-    const x    = e.type.includes('touch') ? e.touches[0].clientX : e.clientX;
-    const now  = Date.now();
-    const dt   = now - lastTime || 1;
-    velocity   = (x - lastX) / dt * 16;
-    lastX      = x;
-    lastTime   = now;
-
-    const diff = x - startX;
-    targetAngle = startAngle + diff * 0.45;
-  }
-
-  function dragEnd() {
-    if (!isDragging) return;
-    isDragging = false;
-    targetAngle += velocity * 8; // momentum flick
-    ring.style.cursor = 'grab';
-    stage.style.cursor = 'grab';
-    scheduleAuto();
-  }
-
-  // Drag works anywhere on the page when initiated from gallery section
-  const gallerySection = document.getElementById('gallery');
-
-  function isInGallery(e) {
-    return gallerySection && gallerySection.contains(e.target);
-  }
-
-  // Start drag anywhere inside gallery section
-  gallerySection && gallerySection.addEventListener('mousedown', dragStart);
-  window.addEventListener('mousemove', dragMove);
-  window.addEventListener('mouseup',   dragEnd);
-
-  // Touch — start from anywhere in gallery
-  gallerySection && gallerySection.addEventListener('touchstart', dragStart, { passive: true });
-  window.addEventListener('touchmove', (e) => {
-    if (isDragging) e.preventDefault();
-    dragMove(e);
-  }, { passive: false });
-  window.addEventListener('touchend', dragEnd);
-
-  // Also keep stage draggable (fallback)
-  stage.addEventListener('mousedown', dragStart);
-  stage.addEventListener('touchstart', dragStart, { passive: true });
 
   // ── Arrow buttons ──
-  if (prevBtn) prevBtn.addEventListener('click', () => {
-    autoRotate = false;
-    targetAngle += angleStep;
-    scheduleAuto();
-  });
-  if (nextBtn) nextBtn.addEventListener('click', () => {
-    autoRotate = false;
-    targetAngle -= angleStep;
-    scheduleAuto();
+  prevBtn && prevBtn.addEventListener('click', (e) => { e.stopPropagation(); goTo(current - 1); resetAuto(); });
+  nextBtn && nextBtn.addEventListener('click', (e) => { e.stopPropagation(); goTo(current + 1); resetAuto(); });
+
+  // ── Click main image = open lightbox ──
+  mainEl && mainEl.addEventListener('click', (e) => {
+    if (e.target.closest('.tc-arrow')) return;
+    const img   = slides[current].querySelector('img');
+    const title = slides[current].dataset.title || '';
+    if (img) openLightbox(img.src, title);
   });
 
-  // ── Click to open lightbox ──
-  slides.forEach(slide => {
-    slide.addEventListener('click', (e) => {
-      if (Math.abs(slide._dragDelta || 0) > 6) return; // was a drag, not a click
-      const img   = slide.dataset.img;
-      const title = slide.dataset.title || '';
-      if (slide.classList.contains('no-img')) return;
-      openLightbox(img, title);
-    });
+  // ── Keyboard nav ──
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowLeft')  goTo(current - 1);
+    if (e.key === 'ArrowRight') goTo(current + 1);
   });
 
-  // Track drag delta on slide to distinguish click vs drag
-  slides.forEach(slide => {
-    let sx = 0;
-    slide.addEventListener('mousedown',  e => { sx = e.clientX; slide._dragDelta = 0; });
-    slide.addEventListener('mouseup',    e => { slide._dragDelta = Math.abs(e.clientX - sx); });
-    slide.addEventListener('touchstart', e => { sx = e.touches[0].clientX; slide._dragDelta = 0; }, { passive: true });
-    slide.addEventListener('touchend',   e => { slide._dragDelta = Math.abs((e.changedTouches[0]?.clientX || sx) - sx); });
-  });
+  // ── Touch swipe ──
+  let touchStartX = 0;
+  mainEl && mainEl.addEventListener('touchstart', e => {
+    touchStartX = e.touches[0].clientX;
+  }, { passive: true });
+  mainEl && mainEl.addEventListener('touchend', e => {
+    const dx = e.changedTouches[0].clientX - touchStartX;
+    if (Math.abs(dx) > 40) {
+      dx < 0 ? goTo(current + 1) : goTo(current - 1);
+      resetAuto();
+    }
+  }, { passive: true });
 
+  // ── Auto-advance ──
+  function startAuto() {
+    autoId = setInterval(() => goTo(current + 1), 4500);
+  }
+  function resetAuto() {
+    clearInterval(autoId);
+    startAuto();
+  }
+
+  // Init
+  goTo(0);
+  startAuto();
 })();
 
 /* ── Lightbox ────────────────────────────────────── */
@@ -397,10 +304,14 @@ function showMsg(type, text) {
 /* ── Smooth anchor scroll for all nav links ──────── */
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   anchor.addEventListener('click', (e) => {
-    const target = document.querySelector(anchor.getAttribute('href'));
+    const href = anchor.getAttribute('href');
+    if (href === '#') return;
+    const target = document.querySelector(href);
     if (target) {
       e.preventDefault();
-      target.scrollIntoView({ behavior: 'smooth' });
+      const navH   = document.getElementById('navbar')?.offsetHeight || 76;
+      const top    = target.getBoundingClientRect().top + window.scrollY - navH;
+      window.scrollTo({ top, behavior: 'smooth' });
     }
   });
 });
@@ -417,7 +328,7 @@ const linkObserver = new IntersectionObserver((entries) => {
       });
     }
   });
-}, { threshold: 0.4 });
+}, { threshold: 0.1, rootMargin: '-10% 0px -80% 0px' });
 sections.forEach(s => linkObserver.observe(s));
 
 /* ── Floating Contact Button ─────────────────────── */
